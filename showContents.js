@@ -19,19 +19,19 @@ async function getFiles(storagePath){
   let filestorage = new Filestorage(web3, true);
   console.log("filestorage")
 
-  const basePath = web3.utils.stripHexPrefix(account1.accountAddress);
-
+  //const basePath = web3.utils.stripHexPrefix(account1.accountAddress);
+    const basePath = account1.accountAddress;
   //provide your account & private key
   let account = account1.accountAddress;
-  let files = await filestorage.listDirectory(basePath);
+  let files = await filestorage.listDirectory(storagePath);
   console.log("files")
   return files
 }
 
 // var storagepath = "";
-var storagepath = "/" + account1.accountAddress.substring(2) + "/";
+var storagepath = "/" + account1.accountAddress.substring(2) + "/testdirectory3/";
 
-resultpromise = getFiles (storagepath);
+resultpromise = getFiles (account1.accountAddress.substring(2));
 resultpromise.then(function(result) {
       console.log('Result', result);
     });

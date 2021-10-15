@@ -30,7 +30,7 @@ async function uploadFile(originPath, targetPath){
   const filePath = targetPath;
 
   var fileBuffer = await readFile(originPath);
-  console.log("readFile");
+  console.log("readFile", fileBuffer.length);
 
   const bytes = new Uint8Array(fileBuffer.buffer);
 
@@ -51,5 +51,5 @@ async function uploadFile(originPath, targetPath){
 
 uploadFile(
   path.join(__dirname + "/SKALEtestfile.txt"),
-  "SKALEtestfile8.txt"
+  "SKALEtestfile10.txt"
 )

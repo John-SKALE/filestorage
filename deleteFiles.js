@@ -1,8 +1,9 @@
 const account1 = require("./hidden.json").account1;
+const Web3 = require('web3'); // version 1.0.0-beta.35
+const Filestorage = require('@skalenetwork/filestorage.js');
+
 async function deleteFile(filePath) {
   //create web3 connection
-  const Web3 = require('web3'); // version 1.0.0-beta.35
-  const Filestorage = require('@skalenetwork/filestorage.js');
   const web3Provider = new Web3.providers.HttpProvider(
     account1.skaleEndpoint
   );
