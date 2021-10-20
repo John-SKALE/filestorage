@@ -29,12 +29,31 @@ async function uploadFile(originPath, targetPath){
 
   const filePath = targetPath;
 
-  var fileBuffer = await readFile(originPath);
-  console.log("readFile", fileBuffer.length);
+  fs = require('fs')
+  const data = await new Promise((res, rej)=>{
+    fs.readFile('SKALEtestfile.txt', 'utf8', function (err, data) {
+      if(err) return rej(err);
+      res(data)
+    });
+  })
 
-  const bytes = new Uint8Array(fileBuffer.buffer);
+  bytes = Buffer.from(data, 'utf8');
+  //var fileBuffer = await readFile(originPath);
+  //console.log("readFile", fileBuffer.length);
+
+  //const bytes = new Uint8Array(fileBuffer.buffer);
 
   let privateKey = account1.privateKey;
+  // let reservespace = filestorage.getReservedSpace(account);
+  // let reservespace = filestorage.getOccupiedSpace(account);
+  // let reservespace = filestorage.getTotalSpace(account);
+  // let reservespace = filestorage.getTotalReservedSpace();
+
+  let reservespace = '1000'; // bytes.length.toString();
+
+  console.log ('Reservespace', reservespace);
+  let reserve = await filestorage.reserveSpace(account, account, reservespace, privateKey);
+      console.log('Reserve', reserve);
 
   let linkpromise = await filestorage.uploadFile(
     account, 
@@ -43,13 +62,14 @@ async function uploadFile(originPath, targetPath){
     privateKey
   );
 
-  console.log("uploadFile")
+  console.log("uploadFile", linkpromise)
 
   return linkpromise
+
 
 }
 
 uploadFile(
   path.join(__dirname + "/SKALEtestfile.txt"),
-  "SKALEtestfile10.txt"
+  "SKALEtestfile9.txt"
 )

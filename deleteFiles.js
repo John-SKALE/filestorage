@@ -17,9 +17,17 @@ async function deleteFile(filePath) {
   let privateKey = account1.privateKey;
   let account = account1.accountAddress;
 
-  await filestorage.deleteFile(account, filePath, privateKey);
+  // const fullPath = path.join(account.substring(2), filePath);
+
+  console.log("before delete file")
+
+
+  const result = await filestorage.deleteFile(account, filePath, privateKey);
+  console.log("after delete file", result);
+
+  return result
 }
-var storagepath = "SKALEtestfile8.txt";
+var storagepath = "SKALEtestfile9.txt";
 resultpromise = deleteFile(storagepath);
 resultpromise.then(function(result) {
       console.log('Result', result);
